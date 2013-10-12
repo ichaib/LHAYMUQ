@@ -1,13 +1,27 @@
 body {
   font: 14px "Helvetica Neue", Helvetica;
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 #logo {
-  font-size: 42px;
+  font-size: 68px;
   color: #061542;
   font-family: 'Shadows Into Light', cursive;
+  display: inline-block;
 }
 #description {
   font-size: 14px;
   font-style: italic;
+}
+
+#mascot {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 30px;
+}
+
+#header {
+ margin-left: 20px; 
 }
