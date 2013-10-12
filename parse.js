@@ -3,6 +3,7 @@ var natural = require('natural');
 var nlp = require('nlp-node-master');
 var date_extractor = require('./date_extractor.js');
 var util = require('util');
+var obp = require('./obpdata.js');
 
 
 function parse(query)
@@ -34,15 +35,20 @@ function get_timespan(query){
 	timespan = date_extractor(query);
 	from = new Date(timespan.from.year, timespan.from.month, timespan.from.day);
 	to = new Date(timespan.to.year, timespan.to.month, timespan.to.day);
+	console.log("=----------- from: " + from);
+	console.log("=----------- to: " + to);
 	return {"from":from, "to":to};
 }
 
 function get_data(action, timespan){
-	all_transactions = get_transactions();
 	switch (action){
 		case "earn": // obp.earn.timespan(start, end)
 			break;
-		case "spend": //
+		case "spend":
+
+			result = obp.get_spending(timespan.from, timespan.to);
+			console.log("=----------- data successfully published. Sum is: " + result.sum);
+			
 			break;
 		case "payment-to": //
 			break;
@@ -51,15 +57,7 @@ function get_data(action, timespan){
 		default:
 		//
 	}
-	var array = null
-	transactions = JSON.stringify({ summary: action, transactions: array});
-	return transactions;
-}
-
-
-function get_data(action, timespan){
-	//TODO: search the data, or something
-	return {"summary" : "Summary", "transactions" : ["transactions"]};
+	return {"summary" : result.sum, "transactions" : result.transactions};
 }
 
 

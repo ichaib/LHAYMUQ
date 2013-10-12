@@ -1,5 +1,6 @@
 var https = require('https');
 var _ = require('underscore');
+var util = require('util');
 
 //store all the transactions in memory (and only for a single hardcoded account) for now
 var obpData = [];

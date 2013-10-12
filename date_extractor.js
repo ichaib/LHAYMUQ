@@ -9,6 +9,7 @@
  */
 
 
+//TODO: add today, yesterday, this year when no year is included , last month, this month,  from MonthX to MonthY
 
 var date_extractor = (function() {
 
