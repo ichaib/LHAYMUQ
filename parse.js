@@ -1,16 +1,21 @@
 var _ = require('underscore');
 var natural = require('natural');
+var nlp = require('nlp-node-master');
 
 function parse(query)
-{ 
+{
 	//Initiate classifier
+	console.log(nlp.date_extractor('my wife left me on the 9th of april, 2005.'));
 	classifier = new natural.BayesClassifier();
 	init();
-	//Figure out what action should be taken and for which timespan by analysing the query string
-	action = get_action(query);
-	timespan = get_timespan(query);
-	//Return appropriate dataset in the right json format
-    json = get_data(action, timespan);
+	var json;
+	if (query){
+		//Figure out what action should be taken and for which timespan by analysing the query string
+		action = get_action(query);
+		timespan = get_timespan(query);
+		//Return appropriate dataset in the right json format
+		json = get_data(action, timespan);
+	}
     return json;
 }
 
