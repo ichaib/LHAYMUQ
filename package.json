@@ -7,6 +7,6 @@
     "express": "3.x",
     "jade": "0.35.0",
     "natural":"0.1.x",
-    "underscore": "1.5.2"
+    "underscore": "1.5.2",
   }
 }
