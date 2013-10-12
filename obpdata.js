@@ -20,7 +20,6 @@ function loadObpData() {
     
     res.on('data', function(d) {
 	data += d;
-	console.log('some data...');
     });
     
     res.on('end', function() {
