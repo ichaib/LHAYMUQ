@@ -46,6 +46,8 @@ app.get('/client.js', function(req, res){
   res.sendfile(__dirname + '/client.js');
 });
 
+app.use(express.static(__dirname + '/public'));
+
 app.listen(3000);
 console.log('app listening on port 3000');
 
