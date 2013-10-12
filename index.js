@@ -24,6 +24,7 @@ app.get('/', function(req, res){
 
 app.get('/search/:query?', function(req, res){
   var query = req.params.query;
+  //TODO: log query string
   json = parse.parse(query);
   res.send(json);
 });
