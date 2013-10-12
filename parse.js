@@ -1,11 +1,13 @@
 var _ = require('underscore');
 var natural = require('natural');
 var nlp = require('nlp-node-master');
+var date_extractor = require('./date_extractor.js');
+var util = require('util');
+
 
 function parse(query)
 {
 	//Initiate classifier
-	console.log(nlp.date_extractor('my wife left me on the 9th of april, 2005.'));
 	classifier = new natural.BayesClassifier();
 	init();
 	var json;
@@ -28,11 +30,9 @@ function get_action(query){
 }
 
 function get_timespan(query){
-	natural.PorterStemmer.attach();
-	tokens = query.tokenizeAndStem();
-	//go through the tokens, find a month, translate it to a number
-	timespan = 0;
-	return timespan; 
+	//Example of output format = { text: '9th of april, 2005', from: { year: '2005', month: '04', day: '09' }, to: {} }
+	timespan = date_extractor(query);
+	return timespan;
 }
 
 function get_data(action, timespan){

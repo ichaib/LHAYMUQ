@@ -2,9 +2,11 @@
  * Module dependencies.
  */
 
+
 var express = require('express');
 var parse = require('./parse.js');
 var obpdata = require('./obpdata.js');
+
 
 obpdata.loadObpData();
 
@@ -27,7 +29,7 @@ app.get('/', function(req, res){
 
 app.get('/search/:query?', function(req, res){
   var query = req.params.query;
-  //TODO: log query string
+  //TODO: log query string  
   json = parse.parse(query);
   res.send(json);
 });
