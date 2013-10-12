@@ -1,14 +1,20 @@
 var search = document.querySelector('[type=search]');
 var searchImage = document.getElementById('search-button');
-var code = document.querySelector('pre');
+var summary = document.getElementById('answer-summary');
+var transactions = document.getElementById('answer-transactions');
 
+
+function displaySearchResult(response) {
+  summary.textContent = response.summary;
+  transactions.textContent = response.transactions;
+}
 
 function sendSearchRequest() {
   var xhr = new XMLHttpRequest;
   xhr.open('GET', '/search/' + search.value, true);
   xhr.onreadystatechange = function(){
     if (4 == xhr.readyState) {
-      code.textContent = xhr.responseText;
+      displaySearchResult(JSON.parse(xhr.responseText));
     }
   };
   xhr.send();
