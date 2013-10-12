@@ -1,0 +1,13 @@
+body {
+  font: 14px "Helvetica Neue", Helvetica;
+  padding: 50px;
+}
+#logo {
+  font-size: 42px;
+  color: #061542;
+  font-family: 'Shadows Into Light', cursive;
+}
+#description {
+  font-size: 14px;
+  font-style: italic;
+}

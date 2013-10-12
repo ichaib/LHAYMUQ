@@ -2,14 +2,12 @@
 html
   head
     title Search example
-    style.
-      body {
-        font: 14px "Helvetica Neue", Helvetica;
-        padding: 50px;
-      }
+    link(rel='stylesheet',href='http://fonts.googleapis.com/css?family=Shadows+Into+Light')
+    link(rel='stylesheet',href="/css/main.css")
+    
   body
-    h2 LHAYMUQ
-    p Ask your Money
+    h2(id="logo") L'Haym'uq
+    h5(id="description") Ask your Money
     input(type='search')
     img(id="search-button" src="/images/search.png")
     div(id="answer-summary")
