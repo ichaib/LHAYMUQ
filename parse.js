@@ -34,7 +34,7 @@ function get_timespan(query){
 function get_data(action, timespan){
 	all_transactions = get_transactions();
 	switch (action){
-		case "earn": //
+		case "earn": // obp.earn.timespan(start, end)
 			break;
 		case "spend": //
 			break;
