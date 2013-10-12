@@ -4,6 +4,9 @@
 
 var express = require('express');
 var parse = require('./parse.js');
+var obpdata = require('./obpdata.js');
+
+obpdata.loadObpData();
 
 var app = express();
 
