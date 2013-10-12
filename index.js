@@ -3,6 +3,7 @@
  */
 
 var express = require('express');
+var parse = require('./parse.js');
 
 var app = express();
 
@@ -23,17 +24,9 @@ app.get('/', function(req, res){
 
 app.get('/search/:query?', function(req, res){
   var query = req.params.query;
-  json = parse(query);
+  json = parse.parse(query);
   res.send(json);
 });
-
-function parse(query)
-{
-    summary = "sum1";
-    array = ["item1", "item2"];
-    json = JSON.stringify({ summary: summary, transactions: array});
-    return json;
-}
 
 /**
  * GET client javascript. Here we use sendfile()
