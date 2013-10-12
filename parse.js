@@ -52,8 +52,8 @@ function get_data(action, timespan){
 
 
 function get_data(action, timespan){
-	//TODO: Something more interesting than logging
-	 get_transactions(logData);
+	//TODO: search the data, or something
+	return {"summary" : "Summary", "transactions" : ["transactions"]};
 }
 
 function logData(transactions) {
