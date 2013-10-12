@@ -41,14 +41,17 @@ function get_timespan(query){
 }
 
 function get_data(action, timespan){
+	var message = 'Ooups, I did not understand your request :(';
 	switch (action){
 		case "earn": // obp.earn.timespan(start, end)
 			break;
 		case "spend":
 
 			result = obp.get_spending(timespan.from, timespan.to);
+			message = "You spent: " + result.sum;
 			console.log("=----------- data successfully published. Sum is: " + result.sum);
-			
+
+
 			break;
 		case "payment-to": //
 			break;
@@ -57,7 +60,7 @@ function get_data(action, timespan){
 		default:
 		//
 	}
-	return {"summary" : result.sum, "transactions" : result.transactions};
+	return {"summary" : message, "transactions" : result.transactions};
 }
 
 
