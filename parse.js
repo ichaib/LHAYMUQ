@@ -32,7 +32,9 @@ function get_action(query){
 function get_timespan(query){
 	//Example of output format = { text: '9th of april, 2005', from: { year: '2005', month: '04', day: '09' }, to: {} }
 	timespan = date_extractor(query);
-	return timespan;
+	from = new Date(timespan.from.year, timespan.from.month, timespan.from.day);
+	to = new Date(timespan.to.year, timespan.to.month, timespan.to.day);
+	return {"from":from, "to":to};
 }
 
 function get_data(action, timespan){

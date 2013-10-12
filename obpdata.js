@@ -68,4 +68,11 @@ function lessThan(obpTransactions, amount) {
   });
 }
 
+function get_spending(startDate, endDate){
+  transactions = withinDateRange(lessThan(obpData, 0), startDate, endDate);
+  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
+  return {"sum":sum, "transactions":transactions};
+}
+
 module.exports.loadObpData = loadObpData;
+module.exports.get_spending = get_spending;
