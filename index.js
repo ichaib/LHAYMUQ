@@ -23,12 +23,17 @@ app.get('/', function(req, res){
 
 app.get('/search/:query?', function(req, res){
   var query = req.params.query;
-  res.send("hello world");
-  //db.smembers(query, function(err, vals){
-    //if (err) return res.send(500);
-    //res.send(vals);
-  //});
+  json = parse(query);
+  res.send(json);
 });
+
+function parse(query)
+{
+    summary = "sum1";
+    array = ["item1", "item2"];
+    json = JSON.stringify({ summary: summary, transactions: array});
+    return json;
+}
 
 /**
  * GET client javascript. Here we use sendfile()
