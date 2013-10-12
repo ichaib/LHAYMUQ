@@ -3,6 +3,7 @@ html
   head
     title Search example
     link(rel='stylesheet',href='http://fonts.googleapis.com/css?family=Shadows+Into+Light')
+    link(rel='stylesheet',href='http://fonts.googleapis.com/css?family=Bubbler+One')
     link(rel='stylesheet',href="/css/reset.css")
     link(rel='stylesheet',href="/css/main.css")
     
@@ -10,9 +11,10 @@ html
     div(id="header")
       img(id="mascot" src="/images/mascot.png")
       h2(id="logo") L'Haym'uq!
-    h5(id="description") Ask your Money
-    input(type='search')
-    img(id="search-button" src="/images/search.png")
-    div(id="answer-summary")
-    div(id="answer-transactions")
-    script(src='client.js')
+      h5(id="description") Ask your Money
+    div(id="content")
+      input(id="search-bar" type='search')
+      img(id="search-button" src="/images/search.png")
+      div(id="answer-summary")
+      div(id="answer-transactions")
+      script(src='client.js')

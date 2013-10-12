@@ -7,9 +7,14 @@ body {
   font-family: 'Shadows Into Light', cursive;
   display: inline-block;
 }
+/* hacky positioning */
 #description {
-  font-size: 14px;
-  font-style: italic;
+  font-size: 24px;
+  font-family: 'Bubbler One', cursive;
+  font-style: bold;
+  position: relative;
+  left: 250px;
+  top: -20px;
 }
 
 #mascot {
@@ -21,5 +26,44 @@ body {
 }
 
 #header {
- margin-left: 20px; 
+  margin-left: 20px; 
+}
+
+#content {
+  width: 980px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#search-bar {
+  width: 700px;
+  height: 30px;
+  font-size: 20px;
+  border: 5px solid white; 
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    padding: 15px;
+}
+
+#search-button {
+  height: 20px;
+  border: 5px solid white; 
+    -webkit-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    -moz-box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1); 
+    box-shadow: 
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+  padding: 5px;
 }
