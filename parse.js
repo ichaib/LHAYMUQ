@@ -34,7 +34,7 @@ function get_other_account(query){
 	for (i=0;i<tokens.length;i++){
 		token = tokens[i];
 		if (token == "from"){
-			if (i>=1 && tokens[i-1] == "payments"){
+			if (i>=1 && (tokens[i-1] == "payments") || (tokens[i-1] == "Payments")){
 				if (i+1 < tokens.length){
 					other_account = tokens[i+1];
 					return other_account;
@@ -98,9 +98,17 @@ function init(){
 	 
 	classifier.addDocument(['how', 'much', 'money','I', 'have', 'spent'], 'spend');
     classifier.addDocument(['how', 'much', 'money','I', 'have', 'earned'], 'earn');
+    classifier.addDocument(['how', 'much', 'money','did', 'I', 'earn'], 'earn');
     classifier.addDocument(['my', 'payment', 'from'], 'payment-from');
+<<<<<<< HEAD
     classifier.addDocument("Can I go to the bahamas", 'no');
     classifier.addDocument("Can I go to Manchester", 'yes');
+=======
+    classifier.addDocument(['payments', 'from'], 'payment-from');
+    classifier.addDocument(['payment', 'from'], 'payment-from');
+    classifier.addDocument(['Payments', 'from'], 'payment-from');
+    classifier.addDocument(['Payment', 'from'], 'payment-from')
+>>>>>>> 3ef33c5ef6eb0856671a62e03fee2781611a628a
     
     /*
     classifier.addDocument('', 'spend');
