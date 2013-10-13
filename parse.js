@@ -88,9 +88,13 @@ function get_data(query){
 //TODO: add training set
 function init(){
 	 
-	classifier.addDocument(['how', 'much', 'money','I', 'have', 'spent'], 'spend');
+    classifier.addDocument(['how', 'much', 'money','I', 'have', 'spent'], 'spend');
+    classifier.addDocument(['how', 'much', 'money','did', 'I', 'spend'], 'spend');
     classifier.addDocument(['how', 'much', 'money','I', 'have', 'earned'], 'earn');
+    classifier.addDocument(['how', 'much', 'money','did', 'I', 'earn'], 'earn');
     classifier.addDocument(['my', 'payment', 'from'], 'payment-from');
+    classifier.addDocument(['payments', 'from'], 'payment-from');
+    classifier.addDocument(['payment', 'from'], 'payment-from');
     
     /*
     classifier.addDocument('', 'spend');

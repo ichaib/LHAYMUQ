@@ -76,7 +76,7 @@ function to(obpTransactions, other_account) {
   console.log("Account to be searched: " + other_account);
   return _.filter(obpTransactions, function(t) {
     console.log("Other Party log: " + t.otherParty);
-    return t.otherParty.indexOf(other_account)!= -1;
+    return t.otherParty.toLowerCase().indexOf(other_account.toLowerCase())!= -1;
     //return _.contains(t.otherParty, other_account);
   });
 }
