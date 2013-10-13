@@ -49,7 +49,7 @@ function get_other_account(query){
 
 function get_timespan(query){
 	timespan = date_extractor(query);
-	from = new Date(timespan.from.year, timespan.from.month, timespan.from.day);
+	from = new Date(timespan.from.year, timespan.from.month - 1, timespan.from.day);
 	to = new Date(timespan.to.year, timespan.to.month - 1, timespan.to.day);
 	console.log("=----------- from: " + from);
 	console.log("=----------- to: " + to);
