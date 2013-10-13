@@ -5,7 +5,8 @@ var transactions = document.getElementById('answer-transactions');
 
 
 function clearTable() {
-  for(var i = 1; i < transactions.rows.length; i++) {
+  var rows = transactions.rows.length;
+  for(var i = 1; i < rows; i++) {
     transactions.deleteRow(1);
   }
 }
@@ -13,7 +14,6 @@ function clearTable() {
 
 function displaySearchResult(response) {
   clearTable();
-  
   summary.textContent = response.summary;
   summary.style.visibility = "visible";
   
