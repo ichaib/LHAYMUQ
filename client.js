@@ -5,8 +5,9 @@ var transactions = document.getElementById('answer-transactions');
 
 
 function clearTable() {
+  alert("clear! " + transactions.rows.length);
   for(var i = 1; i < transactions.rows.length; i++) {
-    transactions.deleteRow(i);
+    transactions.deleteRow(1);
   }
 }
 
