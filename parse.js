@@ -73,7 +73,15 @@ function get_data(query){
 			break;
 		case "payment-from":
 			result = obp.get_payments_from(timespan.from, timespan.to, other_account);
-			message = "From " + other_account + " You have sent; " + result.sum;
+			message = "From " + other_account + ", you have received: " + result.sum;
+			break;
+		case "no":
+			result = [];
+			message = "Sorry, it looks like you can't afford this at the moment :-(";
+			break;
+		case "yes":
+			result = [];
+			message = "Sure - Manchester is so cheap!";
 			break;
 		default:
 			result = [];
@@ -91,6 +99,8 @@ function init(){
 	classifier.addDocument(['how', 'much', 'money','I', 'have', 'spent'], 'spend');
     classifier.addDocument(['how', 'much', 'money','I', 'have', 'earned'], 'earn');
     classifier.addDocument(['my', 'payment', 'from'], 'payment-from');
+    classifier.addDocument("Can I go to the bahamas", 'no');
+    classifier.addDocument("Can I go to Manchester", 'yes');
     
     /*
     classifier.addDocument('', 'spend');
