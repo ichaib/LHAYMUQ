@@ -1,6 +1,6 @@
 {
-  "name": "Search",
-  "description": "Search Example - LHAYMUQ : LHAYMUQ Helps you Ask Your Money Useful Questions",
+  "name": "LHAYMUQ",
+  "description": "LHAYMUQ : LHAYMUQ Helps Ask Your Money Useful Questions",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
