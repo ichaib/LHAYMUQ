@@ -13,11 +13,7 @@ function parse(query)
 	init();
 	var json;
 	if (query){
-		//Figure out what action should be taken and for which timespan by analysing the query string
-		action = get_action(query);
-		timespan = get_timespan(query);
-		//Return appropriate dataset in the right json format
-		json = get_data(action, timespan);
+		json = get_data(query);
 	}
     return json;
 }
@@ -31,7 +27,6 @@ function get_action(query){
 }
 
 function get_timespan(query){
-	//Example of output format = { text: '9th of april, 2005', from: { year: '2005', month: '04', day: '09' }, to: {} }
 	timespan = date_extractor(query);
 	from = new Date(timespan.from.year, timespan.from.month, timespan.from.day);
 	to = new Date(timespan.to.year, timespan.to.month, timespan.to.day);
@@ -40,24 +35,34 @@ function get_timespan(query){
 	return {"from":from, "to":to};
 }
 
-function get_data(action, timespan){
+function get_other_account(query){
+	//var patt=new RegExp(('from' OR 'to')'\w','i');
+
+	return 
+}
+function get_data(query){
 	var message = 'Ooups, I did not understand your request :(';
-	switch (action){
-		case "earn": // obp.earn.timespan(start, end)
+	other_account = get_other_account(query);
+	timespan = get_timespan(query);
+	switch (get_action(query)){
+		case "earn":
+			result = obp.get_earning(timespan.from, timespan.to);
+			message = "Your income: " + result.sum;
 			break;
 		case "spend":
-
 			result = obp.get_spending(timespan.from, timespan.to);
 			message = "You spent: " + result.sum;
-			console.log("=----------- data successfully published. Sum is: " + result.sum);
-
-
 			break;
-		case "payment-to": //
+		case "payment-to":
+			result = obp.get_payment_to(timespan.from, timespan.to, other_account);
+			message = "To " + other_account + " You have sent: " + result.sum;
 			break;
-		case "payment-from": //
-			break; 
+		case "payment-from":
+			result = obp.get_payment_from(timespan.from, timespan.to, other_account);
+			message = "From " + other_account + " You have sent; " + result.sum;
+			break;
 		default:
+			console.log("Error while computing the data");
 		//
 	}
 	return {"summary" : message, "transactions" : result.transactions};

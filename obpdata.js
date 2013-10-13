@@ -26,6 +26,7 @@ function loadObpData() {
     res.on('end', function() {
         var rawObpData = JSON.parse(data);
 	obpData = _.map(rawObpData.transactions, simpleTransactionFormat);
+  currency = obpData[0].currency;
     });
     
   });
@@ -69,11 +70,44 @@ function lessThan(obpTransactions, amount) {
   });
 }
 
+function to(obpTransactions, other_account) {
+  return _.filter(obpTransactions, function(t) {
+    return t.otherParty == other_account;
+  });
+}
+
 function get_spending(startDate, endDate){
   transactions = withinDateRange(lessThan(obpData, 0), startDate, endDate);
   sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
-  return {"sum":sum, "transactions":transactions};
+  return {"sum":sum + currency, "transactions":transactions};
 }
+
+function get_earning(startDate, endDate){
+  transactions = withinDateRange(greaterThan(obpData, 0), startDate, endDate);
+  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
+  return {"sum":sum + currency, "transactions":transactions};
+}
+
+function get_payments_to(startDate, endDate, other_account){
+  
+  tr = withinDateRange(lessThan(obpData, 0), startDate, endDate);
+  transactions = to(tr, other_account)
+  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
+  return {"sum":sum + currency, "transactions":transactions};
+}
+
+function get_payments_from(startDate, endDate, other_account){
+  
+  tr = withinDateRange(greaterThan(obpData, 0), startDate, endDate);
+  transactions = to(tr, other_account)
+  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
+  return {"sum":sum + currency, "transactions":transactions};
+}
+
+
 
 module.exports.loadObpData = loadObpData;
 module.exports.get_spending = get_spending;
+module.exports.get_earning = get_earning;
+module.exports.get_payments_from = get_payments_from;
+module.exports.get_payments_to = get_payments_to;
