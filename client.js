@@ -17,7 +17,10 @@ function displaySearchResult(response) {
     
     date.innerHTML = d.format("DD MMM YYYY");
     var amount = row.insertCell(1);
-    amount.innerHTML = t.amount;
+    
+    var currency = t.currency;
+    
+    amount.innerHTML = t.amount.toFixed(2) + " (" + currency + ")";
     var otherParty = row.insertCell(2);
     otherParty.innerHTML = t.otherParty;
   }
