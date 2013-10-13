@@ -13,10 +13,9 @@ function displaySearchResult(response) {
     var row = transactions.insertRow(-1);
     var date = row.insertCell(0);
     
-    var d = new Date(t.date);
+    var d = moment(t.date);
     
-    //TODO: Format
-    date.innerHTML = d.toString();
+    date.innerHTML = d.format("DD MMM YYYY");
     var amount = row.insertCell(1);
     amount.innerHTML = t.amount;
     var otherParty = row.insertCell(2);
