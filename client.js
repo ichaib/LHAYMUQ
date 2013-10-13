@@ -8,7 +8,21 @@ function displaySearchResult(response) {
   summary.textContent = response.summary;
   summary.style.visibility = "visible";
   
-  transactions.textContent = JSON.stringify(response.transactions);
+  for(var i = 0; i < response.transactions.length; i++) {
+    var t = response.transactions[i];
+    var row = transactions.insertRow(-1);
+    var date = row.insertCell(0);
+    
+    var d = new Date(t.date);
+    
+    //TODO: Format
+    date.innerHTML = d.toString();
+    var amount = row.insertCell(1);
+    amount.innerHTML = t.amount;
+    var otherParty = row.insertCell(2);
+    otherParty.innerHTML = t.otherParty;
+  }
+  
   transactions.style.visibility = "visible";
 }
 

@@ -17,5 +17,9 @@ html
       img(id="search-button" src="/images/search.png")
     div(id="results")
       div(id="answer-summary")
-      code(id="answer-transactions")
+      table(id="answer-transactions" class="CSSTableGenerator")
+        tr
+          td Date
+          td Amount
+          td Other Party
     script(src='client.js')
