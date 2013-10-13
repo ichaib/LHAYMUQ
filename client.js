@@ -6,7 +6,10 @@ var transactions = document.getElementById('answer-transactions');
 
 function displaySearchResult(response) {
   summary.textContent = response.summary;
-  transactions.textContent = response.transactions;
+  summary.style.visibility = "visible";
+  
+  transactions.textContent = JSON.stringify(response.transactions);
+  transactions.style.visibility = "visible";
 }
 
 function sendSearchRequest() {

@@ -29,7 +29,7 @@ body {
   margin-left: 20px; 
 }
 
-#content, #results {
+#content {
   width: 980px;
   margin-top: 100px;
   margin-left: auto;
@@ -38,6 +38,7 @@ body {
 
 #results {
   width: 980px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -72,4 +73,18 @@ body {
       inset 0 0 8px  rgba(0,0,0,0.1),
             0 0 16px rgba(0,0,0,0.1);
   padding: 5px;
+}
+
+#answer-summary {
+  border: 1px solid #F39930;
+  background-color: #FEF7F0;
+  width: 980px;
+  text-align: center;
+  visibility: hidden;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#answer-transactions {
+  visibility: hidden;
 }
