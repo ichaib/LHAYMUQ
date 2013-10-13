@@ -9,8 +9,8 @@ var obp = require('./obpdata.js');
 function parse(query)
 {
 	//Initiate classifier
-	//classifier = new natural.BayesClassifier();
-	//init();
+	classifier = new natural.BayesClassifier();
+	init();
 	var json;
 	if (query){
 		json = get_data(query);
@@ -18,15 +18,9 @@ function parse(query)
     return json;
 }
 
-function contains(st1, st2){
-	if (st1.indexOf(st2) != -1)
-		return true;
-	else
-		return false;
-}
 
 function get_action(query){
-	natural.LancasterStemmer.attach();
+	natural.PorterStemmer.attach();
 	tokens = query.tokenizeAndStem();
 	//action = classifier.classify(tokens);
 
@@ -40,6 +34,8 @@ function get_action(query){
 	else if (_.contains(tokens, "spend")){
 		action = "spend";
 	}
+	else
+		action = classifier.classify(tokens);
 
 	console.log("=----------- action is: " + action);
 	return action;
@@ -64,12 +60,13 @@ function get_other_account(query){
 
 }
 
+
 function get_timespan(query){
 	timespan = date_extractor(query);
-	from = new Date(timespan.from.year, timespan.from.month, timespan.from.day);
-	to = new Date(timespan.to.year, timespan.to.month, timespan.to.day);
-	console.log("=----------- from: " + from);
-	console.log("=----------- to: " + to);
+	from = new Date(timespan.from.year, timespan.from.month-1, timespan.from.day);
+	to = new Date(timespan.to.year, timespan.to.month-1, timespan.to.day);
+	console.log("=----------- Date from: " + from);
+	console.log("=----------- Date to: " + to);
 	return {"from":from, "to":to};
 }
 
@@ -87,10 +84,6 @@ function get_data(query){
 			result = obp.get_spending(timespan.from, timespan.to);
 			message = "You spent: " + result.sum;
 			break;
-		case "payment-to":
-			result = obp.get_payment_to(timespan.from, timespan.to, other_account);
-			message = "To " + other_account + " You have sent: " + result.sum;
-			break;
 		case "payment-from":
 			result = obp.get_payments_from(timespan.from, timespan.to, other_account);
 			message = "From " + other_account + " You have sent; " + result.sum;
@@ -107,11 +100,45 @@ function get_data(query){
 
 //TODO: add training set
 function init(){
+	 
 	classifier.addDocument(['how', 'much', 'money','I', 'have', 'spent'], 'spend');
     classifier.addDocument(['how', 'much', 'money','I', 'have', 'earned'], 'earn');
     classifier.addDocument(['my', 'payment', 'from'], 'payment-from');
-    classifier.addDocument(['my', 'payment', 'to'], 'payment-to');
-    classifier.addDocument('payment to qqqq', 'payment-to');
+    
+    /*
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+    classifier.addDocument('', 'spend');
+
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+    classifier.addDocument('', 'earn');
+
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+	classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    classifier.addDocument('', 'payment-from');
+    */
     classifier.train();
 }
 

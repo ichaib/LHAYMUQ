@@ -4,6 +4,7 @@ var util = require('util');
 
 //store all the transactions in memory (and only for a single hardcoded account) for now
 var obpData = [];
+var currency = "";
 
 function loadObpData() {
 
@@ -92,7 +93,7 @@ function get_earning(startDate, endDate){
 function get_payments_to(startDate, endDate, other_account){
   
   tr = withinDateRange(lessThan(obpData, 0), startDate, endDate);
-  transactions = to(tr, other_account)
+  transactions = to(tr, other_account);
   sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
   return {"sum":currency + sum.toFixed(2) , "transactions":transactions};
 }
@@ -100,8 +101,8 @@ function get_payments_to(startDate, endDate, other_account){
 function get_payments_from(startDate, endDate, other_account){
   
   tr = withinDateRange(greaterThan(obpData, 0), startDate, endDate);
-  transactions = to(tr, other_account)
-  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount)}, 0);
+  transactions = to(tr, other_account);
+  sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount) }, 0);
   return {"sum": currency + sum.toFixed(2) , "transactions":transactions};
 }
 
