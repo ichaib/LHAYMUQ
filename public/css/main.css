@@ -44,7 +44,7 @@ body {
 }
 
 #search-bar {
-  width: 800px;
+  width: 940px;
   height: 30px;
   font-size: 20px;
   border: 5px solid white; 
@@ -78,7 +78,7 @@ body {
 #answer-summary {
   border: 1px solid #F39930;
   background-color: #FEF7F0;
-  width: 980px;
+  width: 960px;
   text-align: center;
   visibility: hidden;
   margin-bottom: 10px;
