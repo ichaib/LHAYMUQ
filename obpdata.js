@@ -73,7 +73,7 @@ function lessThan(obpTransactions, amount) {
 
 function to(obpTransactions, other_account) {
   return _.filter(obpTransactions, function(t) {
-    return t.otherParty == other_account;
+    return t.otherParty.indexOf(other_account)!= -1;
   });
 }
 

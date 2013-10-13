@@ -9,8 +9,8 @@ var obp = require('./obpdata.js');
 function parse(query)
 {
 	//Initiate classifier
-	classifier = new natural.BayesClassifier();
-	init();
+	//classifier = new natural.BayesClassifier();
+	//init();
 	var json;
 	if (query){
 		json = get_data(query);
@@ -18,12 +18,50 @@ function parse(query)
     return json;
 }
 
+function contains(st1, st2){
+	if (st1.indexOf(st2) != -1)
+		return true;
+	else
+		return false;
+}
+
 function get_action(query){
-	natural.PorterStemmer.attach();
+	natural.LancasterStemmer.attach();
 	tokens = query.tokenizeAndStem();
-	action = classifier.classify(tokens);
+	//action = classifier.classify(tokens);
+
+	action = "";
+	if (_.contains(tokens, "pay")){
+		action = "payment-from";
+	}
+	else if (_.contains(tokens, "earn")){
+		action = "earn";
+	}
+	else if (_.contains(tokens, "spend")){
+		action = "spend";
+	}
+
 	console.log("=----------- action is: " + action);
 	return action;
+}
+
+function get_other_account(query){
+	natural.LancasterStemmer.attach();
+	tokens = query.tokenizeAndStem();
+	other_account = '';
+	for (i=0;i<tokens.length;i++){
+		token = tokens[i];
+		if (token == "from"){
+			if (i>=1 && tokens[i-1] == "payments"){
+				if (i+1 < tokens.length){
+					other_account = tokens[i+1];
+					console.log("=----------- Other Account: " + other_account);
+					break;
+				}
+			}
+		}
+	}
+
 }
 
 function get_timespan(query){
@@ -35,11 +73,7 @@ function get_timespan(query){
 	return {"from":from, "to":to};
 }
 
-function get_other_account(query){
-	//var patt=new RegExp(('from' OR 'to')'\w','i');
 
-	return 
-}
 function get_data(query){
 	var message = 'Ooups, I did not understand your request :(';
 	other_account = get_other_account(query);
@@ -58,10 +92,12 @@ function get_data(query){
 			message = "To " + other_account + " You have sent: " + result.sum;
 			break;
 		case "payment-from":
-			result = obp.get_payment_from(timespan.from, timespan.to, other_account);
+			result = obp.get_payments_from(timespan.from, timespan.to, other_account);
 			message = "From " + other_account + " You have sent; " + result.sum;
 			break;
 		default:
+			result = [];
+			message = 'Ooups, I did not understand your request :(';
 			console.log("Error while computing the data");
 		//
 	}
