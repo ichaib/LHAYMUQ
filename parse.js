@@ -28,8 +28,8 @@ function get_action(query){
 }
 
 function get_other_account(query){
-	natural.LancasterStemmer.attach();
-	tokens = query.tokenizeAndStem();
+	tokenizer = new natural.WordTokenizer();
+	tokens = tokenizer.tokenize(query);
 	other_account = '';
 	for (i=0;i<tokens.length;i++){
 		token = tokens[i];
@@ -37,8 +37,7 @@ function get_other_account(query){
 			if (i>=1 && tokens[i-1] == "payments"){
 				if (i+1 < tokens.length){
 					other_account = tokens[i+1];
-					console.log("=----------- Other Account: " + other_account);
-					break;
+					return other_account;
 				}
 			}
 		}
@@ -60,8 +59,10 @@ function get_timespan(query){
 function get_data(query){
 	var message = 'Ooups, I did not understand your request :(';
 	other_account = get_other_account(query);
+	console.log("Other account at get_data: " + other_account);
 	timespan = get_timespan(query);
 	switch (get_action(query)){
+	//switch ('payment-from'){
 		case "earn":
 			result = obp.get_earning(timespan.from, timespan.to);
 			message = "Your income: " + result.sum;
@@ -69,10 +70,6 @@ function get_data(query){
 		case "spend":
 			result = obp.get_spending(timespan.from, timespan.to);
 			message = "You spent: " + result.sum;
-			break;
-		case "payment-to":
-			result = obp.get_payment_to(timespan.from, timespan.to, other_account);
-			message = "To " + other_account + " You have sent: " + result.sum;
 			break;
 		case "payment-from":
 			result = obp.get_payments_from(timespan.from, timespan.to, other_account);

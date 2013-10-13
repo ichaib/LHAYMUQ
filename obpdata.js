@@ -73,8 +73,11 @@ function lessThan(obpTransactions, amount) {
 }
 
 function to(obpTransactions, other_account) {
+  console.log("Account to be searched: " + other_account);
   return _.filter(obpTransactions, function(t) {
+    console.log("Other Party log: " + t.otherParty);
     return t.otherParty.indexOf(other_account)!= -1;
+    //return _.contains(t.otherParty, other_account);
   });
 }
 
@@ -102,6 +105,7 @@ function get_payments_from(startDate, endDate, other_account){
   
   tr = withinDateRange(greaterThan(obpData, 0), startDate, endDate);
   transactions = to(tr, other_account);
+  console.log("XXXXXXXXXXXXX Transaction payment object : " + util.inspect(transactions));
   sum = _.reduce(transactions, function(a, b){  return a+ Math.abs(b.amount) }, 0);
   return {"sum": currency + sum.toFixed(2) , "transactions":transactions};
 }
