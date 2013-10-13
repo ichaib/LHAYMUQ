@@ -26,7 +26,8 @@ body {
 }
 
 #header {
-  margin-left: 20px; 
+  margin-left: 20px;
+  width: 980px;
 }
 
 #content {
@@ -44,7 +45,7 @@ body {
 }
 
 #search-bar {
-  width: 700px;
+  width: 940px;
   height: 30px;
   font-size: 20px;
   border: 5px solid white; 
@@ -78,7 +79,7 @@ body {
 #answer-summary {
   border: 1px solid #F39930;
   background-color: #FEF7F0;
-  width: 980px;
+  width: 960px;
   text-align: center;
   visibility: hidden;
   margin-bottom: 10px;

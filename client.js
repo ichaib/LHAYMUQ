@@ -4,7 +4,16 @@ var summary = document.getElementById('answer-summary');
 var transactions = document.getElementById('answer-transactions');
 
 
+function clearTable() {
+  for(var i = 1; i < transactions.rows.length; i++) {
+    transactions.deleteRow(i);
+  }
+}
+
+
 function displaySearchResult(response) {
+  clearTable();
+  
   summary.textContent = response.summary;
   summary.style.visibility = "visible";
   

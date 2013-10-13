@@ -14,7 +14,7 @@ html
       h2(id="logo") L'Haym'uq!
       h5(id="description") Ask your Money
     div(id="content")
-      input(id="search-bar" type='search' autofocus='autofocus')
+      input(id="search-bar" type='search' autofocus='autofocus' list='sample-queries')
       img(id="search-button" src="/images/search.png")
     div(id="results")
       div(id="answer-summary")
@@ -23,4 +23,7 @@ html
           td Date
           td Amount
           td Other Party
+    //- Some sample queries
+    datalist(id="sample-queries")
+      option(value="How much money did I spend between March 15th and October 11th 2012?")
     script(src='client.js')
