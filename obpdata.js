@@ -9,9 +9,9 @@ var currency = "";
 function loadObpData() {
 
   var options = {
-    hostname: 'demo.openbankproject.com',
+    hostname: 'apisandbox.openbankproject.com',
     port: 443,
-    path: '/sandbox/obp/v1.2/banks/rbs/accounts/main/public/transactions',
+    path: '/obp/v1.2/banks/rbs/accounts/main/public/transactions',
     method: 'GET',
     headers : { 'obp_limit': 500 }
   };
